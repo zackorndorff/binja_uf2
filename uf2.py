@@ -91,7 +91,10 @@ class UF2(BinaryView):
                      SegmentFlag.SegmentReadable     |
                      SegmentFlag.SegmentExecutable))
             
-        if "RP2040" in header.get_processor():
+        if any((
+                    "RP2040" in header.get_processor(),
+                    "Microchip (Atmel) SAMD21" in header.get_processor()
+        )):
             self.arch = Architecture['armv7']
             self.platform = self.arch.standalone_platform
         else:
